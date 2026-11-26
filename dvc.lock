@@ -1,0 +1,38 @@
+schema: '2.0'
+stages:
+  prepare:
+    cmd: python src/prepare.py
+    deps:
+    - path: data/telecom_churn.csv
+      hash: md5
+      md5: c366b44c73b3338485a2cb311635175d
+      size: 128984
+    - path: src/prepare.py
+      hash: md5
+      md5: 76b69d5e938ca563f520ed18b6587d25
+      size: 2925
+    outs:
+    - path: data/churn_features.csv
+      hash: md5
+      md5: 9c498d831cf399e637b5f506c63d6840
+      size: 132135
+  train_evaluate:
+    cmd: python src/train_evaluate.py
+    deps:
+    - path: data/churn_features.csv
+      hash: md5
+      md5: 9c498d831cf399e637b5f506c63d6840
+      size: 132135
+    - path: src/train_evaluate.py
+      hash: md5
+      md5: be767dbf520b2f05aecba36783b6469c
+      size: 3143
+    outs:
+    - path: metrics.json
+      hash: md5
+      md5: 3ddf8738e5af0258260500be0cc53edd
+      size: 191
+    - path: models/churn_model.pkl
+      hash: md5
+      md5: f05c2eb6ad34eaa5da665f23d124919b
+      size: 287799
